@@ -6,6 +6,7 @@ import com.gustavnienkotter.ServiceOrderManager.enums.ErrorResponseEnum;
 import com.gustavnienkotter.ServiceOrderManager.exception.BadRequestException;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.repository.UserRepository;
+import com.gustavnienkotter.ServiceOrderManager.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ public class UserService implements UserDetailsService  {
 
 
     private final UserRepository userRepository;
+    private final DateUtil dateUtil;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,6 +37,9 @@ public class UserService implements UserDetailsService  {
         return userRepository.findAll(pageable);
     }
 
+    public Long countAdminUsersInDatabase() {
+        return userRepository.countAdminUsers();
+    }
 
     @Transactional
     public User create(UserDTO userDTO) {
@@ -44,6 +49,17 @@ public class UserService implements UserDetailsService  {
         userDTO.setId(null);
         userDTO.setAuthorities(AuthoritieRoleEnum.ROLE_USER.name());
         return save(userDTO);
+    }
+
+    public void createAdminUser() {
+        User user = User.builder()
+                .name("Admin")
+                .username("admin")
+                .password("admin")
+                .registerDate(dateUtil.timestampNow())
+                .authoritiesRoles(AuthoritieRoleEnum.ROLE_ADMIN.name())
+                .build();
+        userRepository.save(user);
     }
 
     private boolean validUsername(String username) {
