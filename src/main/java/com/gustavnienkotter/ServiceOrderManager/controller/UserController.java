@@ -1,22 +1,19 @@
 package com.gustavnienkotter.ServiceOrderManager.controller;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.userDto.UserDTO;
+import com.gustavnienkotter.ServiceOrderManager.dto.user.UserDTO;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springdoc.api.annotations.ParameterObject;
-import org.springframework.boot.devtools.remote.server.HttpStatusHandler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -70,7 +67,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(path = "Update")
+    @PostMapping(path = "Update")
     @Operation(summary = "Will update user information by Id", tags = {"User"},
             description = "Note: If there are fields not informed, they will be filled in as null")
     @ApiResponses(value = {

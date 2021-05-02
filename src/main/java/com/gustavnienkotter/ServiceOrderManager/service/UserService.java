@@ -1,12 +1,11 @@
 package com.gustavnienkotter.ServiceOrderManager.service;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.userDto.UserDTO;
+import com.gustavnienkotter.ServiceOrderManager.dto.user.UserDTO;
 import com.gustavnienkotter.ServiceOrderManager.enums.AuthoritieRoleEnum;
 import com.gustavnienkotter.ServiceOrderManager.enums.ErrorResponseEnum;
 import com.gustavnienkotter.ServiceOrderManager.exception.BadRequestException;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.repository.UserRepository;
-import com.gustavnienkotter.ServiceOrderManager.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -73,11 +72,11 @@ public class UserService implements UserDetailsService  {
     }
 
     private User save(UserDTO userDTO) {
-        User user = userBuild(userDTO);
+        User user = userBuilder(userDTO);
         return userRepository.save(user);
     }
 
-    private User userBuild(UserDTO userDTO) {
+    private User userBuilder(UserDTO userDTO) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return User.builder()
                 .id(userDTO.getId())

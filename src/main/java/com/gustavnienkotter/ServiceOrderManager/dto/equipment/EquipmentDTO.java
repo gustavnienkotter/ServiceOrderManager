@@ -1,14 +1,12 @@
-package com.gustavnienkotter.ServiceOrderManager.dto.clientDto;
+package com.gustavnienkotter.ServiceOrderManager.dto.equipment;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@AllArgsConstructor
-public class ClientDTO {
+public class EquipmentDTO {
 
     private Long id;
 
@@ -18,14 +16,12 @@ public class ClientDTO {
 
     @NotEmpty
     @NotNull
-    private String address;
+    private String type;
 
     @NotEmpty
     @NotNull
-    private String phone;
+    private String brand;
 
-    @NotEmpty
-    @NotNull
-    private String email;
+    private String description;
 
 }

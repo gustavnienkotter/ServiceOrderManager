@@ -30,4 +30,5 @@ public class Client {
 
     @CreatedDate
     private Timestamp registerDate;
+
 }

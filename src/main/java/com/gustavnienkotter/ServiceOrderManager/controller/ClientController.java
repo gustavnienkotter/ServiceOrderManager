@@ -1,12 +1,10 @@
 package com.gustavnienkotter.ServiceOrderManager.controller;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.clientDto.ClientDTO;
-import com.gustavnienkotter.ServiceOrderManager.model.Client;
+import com.gustavnienkotter.ServiceOrderManager.dto.client.ClientDTO;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ClientProjection;
 import com.gustavnienkotter.ServiceOrderManager.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -69,7 +67,7 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(path = "update")
+    @PostMapping(path = "update")
     @Operation(summary = "Will update Client information by Id", description = "Note: If there are fields not informed, they will be filled in as null",
             tags = {"Client"})
     @ApiResponses(value = {

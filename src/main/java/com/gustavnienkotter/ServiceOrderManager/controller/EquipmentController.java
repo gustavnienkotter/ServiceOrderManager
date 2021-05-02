@@ -1,6 +1,6 @@
 package com.gustavnienkotter.ServiceOrderManager.controller;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.equipmentDto.EquipmentDTO;
+import com.gustavnienkotter.ServiceOrderManager.dto.equipment.EquipmentDTO;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.EquipmentProjection;
 import com.gustavnienkotter.ServiceOrderManager.service.EquipmentService;
@@ -37,7 +37,7 @@ public class EquipmentController {
     }
 
     @GetMapping(path = "/{id}")
-    @Operation(summary = "Get a Equipement by their id", tags = {"Equipment"})
+    @Operation(summary = "Get a Equipment by their id", tags = {"Equipment"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
             @ApiResponse(responseCode = "400", description = "When Equipment not exists in database")
@@ -52,7 +52,7 @@ public class EquipmentController {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
             @ApiResponse(responseCode = "400", description = "If has some unexpected problem to include the Equipment")
     })
-    public ResponseEntity<EquipmentProjection> save(@RequestBody @Valid EquipmentDTO equipmentDTO, @AuthenticationPrincipal User user) {
+    public ResponseEntity<EquipmentProjection> create(@RequestBody @Valid EquipmentDTO equipmentDTO, @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(equipmentService.create(equipmentDTO, user), HttpStatus.CREATED);
     }
 

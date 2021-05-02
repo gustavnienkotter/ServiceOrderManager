@@ -1,6 +1,6 @@
 package com.gustavnienkotter.ServiceOrderManager.service;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.equipmentDto.EquipmentDTO;
+import com.gustavnienkotter.ServiceOrderManager.dto.equipment.EquipmentDTO;
 import com.gustavnienkotter.ServiceOrderManager.enums.ErrorResponseEnum;
 import com.gustavnienkotter.ServiceOrderManager.exception.BadRequestException;
 import com.gustavnienkotter.ServiceOrderManager.model.Equipment;
@@ -33,12 +33,12 @@ public class EquipmentService {
     @Transactional
     public EquipmentProjection create(EquipmentDTO equipmentDTO, User user) {
         equipmentDTO.setId(null);
-        return save(equipmentBuild(equipmentDTO, user));
+        return save(equipmentBuilder(equipmentDTO, user));
     }
 
     @Transactional
     public EquipmentProjection update(EquipmentDTO equipmentDTO, User user) {
-        return save(equipmentBuild(equipmentDTO, user));
+        return save(equipmentBuilder(equipmentDTO, user));
     }
 
     @Transactional
@@ -67,7 +67,7 @@ public class EquipmentService {
         return pf.createProjection(EquipmentProjection.class, equipment);
     }
 
-    private Equipment equipmentBuild(EquipmentDTO equipmentDTO, User user) {
+    private Equipment equipmentBuilder(EquipmentDTO equipmentDTO, User user) {
         return Equipment.builder()
                 .id(equipmentDTO.getId())
                 .name(equipmentDTO.getName())

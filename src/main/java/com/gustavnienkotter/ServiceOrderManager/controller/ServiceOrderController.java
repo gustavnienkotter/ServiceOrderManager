@@ -1,10 +1,6 @@
 package com.gustavnienkotter.ServiceOrderManager.controller;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.serviceOrderDto.EndServiceOrderDTO;
-import com.gustavnienkotter.ServiceOrderManager.dto.serviceOrderDto.ServiceOrderClientDTO;
-import com.gustavnienkotter.ServiceOrderManager.dto.serviceOrderDto.ServiceOrderDTO;
-import com.gustavnienkotter.ServiceOrderManager.dto.serviceOrderDto.ServiceOrderEquipmentDTO;
-import com.gustavnienkotter.ServiceOrderManager.enums.SwaggerTagsEnum;
+import com.gustavnienkotter.ServiceOrderManager.dto.serviceOrder.*;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ServiceOrderProjection;
 import com.gustavnienkotter.ServiceOrderManager.service.ServiceOrderService;
@@ -23,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("serviceorder")
+@RequestMapping("service-order")
 @Log4j2
 @RequiredArgsConstructor
 public class ServiceOrderController {
@@ -49,6 +45,16 @@ public class ServiceOrderController {
         return ResponseEntity.ok(serviceOrderService.listAllOpenServiceOrder(pageable, user));
     }
 
+    @GetMapping(path = "stopped")
+    @Operation(summary = "List all stopped Services Order paginated by logged user", tags = {"Service Order"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful Operation")
+    })
+    public ResponseEntity<Page<ServiceOrderProjection>> listAllStoppedServiceOrder(@ParameterObject Pageable pageable,
+                                                                                @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(serviceOrderService.listAllStoppedServiceOrder(pageable, user));
+    }
+
     @GetMapping(path = "finished")
     @Operation(summary = "List all finished Services Order paginated by logged user", tags = {"Service Order"})
     @ApiResponses(value = {
@@ -69,7 +75,7 @@ public class ServiceOrderController {
         return ResponseEntity.ok(serviceOrderService.findServiceOrderById(id, user));
     }
 
-    @PostMapping(path = "addclient")
+    @PostMapping(path = "add-client")
     @Operation(summary = "Will relate a Client to a Service Order", tags = {"Service Order"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
@@ -80,8 +86,8 @@ public class ServiceOrderController {
         return ResponseEntity.ok(serviceOrderService.addClient(serviceOrderClientDTO, user));
     }
 
-    @PostMapping(path = "addequipment")
-    @Operation(summary = "Will add a Equipament to the list of Equipaments a Service Order", tags = {"Service Order"})
+    @PostMapping(path = "add-equipment")
+    @Operation(summary = "Will add a Equipment to the list of Equipments a Service Order", tags = {"Service Order"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
             @ApiResponse(responseCode = "400", description = "When Service Order or Equipment don't exists in database")
@@ -91,8 +97,8 @@ public class ServiceOrderController {
         return ResponseEntity.ok(serviceOrderService.addEquipment(serviceOrderEquipmentDTO, user));
     }
 
-    @PostMapping(path = "removeequipment")
-    @Operation(summary = "Will remove a Equipament to the list of Equipaments a Service Order", tags = {"Service Order"})
+    @PostMapping(path = "remove-equipment")
+    @Operation(summary = "Will remove a Equipment to the list of Equipments a Service Order", tags = {"Service Order"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
             @ApiResponse(responseCode = "400", description = "When Service Order or Equipment don't exists in database")
@@ -102,16 +108,19 @@ public class ServiceOrderController {
         return ResponseEntity.ok(serviceOrderService.removeEquipment(serviceOrderEquipmentDTO, user));
     }
 
-    @PostMapping(path = "endserviceorder")
-    @Operation(summary = "Will remove a Equipament to the list of Equipaments a Service Order", tags = {"Service Order"},
-            description = "Note: if you do not enter the end date, it will fill in with the current date")
+    @PostMapping(path = "change-status")
+    @Operation(summary = "Will change status of a Service Order to status informed", tags = {"Service Order"},
+            description = "Notes: If you don't enter the date, it will be the current date. " +
+                    "<br>If the status is null, it will be OPENNED by default" +
+                    "<br>StatusEnum: " +
+                    "<br>1 - OPENNED<br>2 - STOPPED<br>3 - FINISHED")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful Operation"),
-            @ApiResponse(responseCode = "400", description = "When Service Order or Equipment don't exists in database")
+            @ApiResponse(responseCode = "400", description = "When Service Order don't exists in database")
     })
-    public ResponseEntity<ServiceOrderProjection> endServiceOrder(@RequestBody @Valid EndServiceOrderDTO endServiceOrderDTO,
-                                                                  @AuthenticationPrincipal User user){
-        return ResponseEntity.ok(serviceOrderService.endServiceOrder(endServiceOrderDTO, user));
+    public ResponseEntity<ServiceOrderProjection> changeStatusServiceOrder(@RequestBody @Valid ChangeStatusDTO changeStatusDTO,
+                                                                   @AuthenticationPrincipal User user){
+        return ResponseEntity.ok(serviceOrderService.changeStatusServiceOrder(changeStatusDTO, user));
     }
 
     @PostMapping(path = "create")

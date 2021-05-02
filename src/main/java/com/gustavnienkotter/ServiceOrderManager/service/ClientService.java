@@ -1,13 +1,11 @@
 package com.gustavnienkotter.ServiceOrderManager.service;
 
-import com.gustavnienkotter.ServiceOrderManager.dto.clientDto.ClientDTO;
+import com.gustavnienkotter.ServiceOrderManager.dto.client.ClientDTO;
 import com.gustavnienkotter.ServiceOrderManager.enums.ErrorResponseEnum;
 import com.gustavnienkotter.ServiceOrderManager.exception.BadRequestException;
 import com.gustavnienkotter.ServiceOrderManager.model.Client;
-import com.gustavnienkotter.ServiceOrderManager.model.ServiceOrder;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ClientProjection;
-import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ServiceOrderProjection;
 import com.gustavnienkotter.ServiceOrderManager.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,12 +33,12 @@ public class ClientService {
     @Transactional
     public ClientProjection create(ClientDTO clientDTO, User user) {
         clientDTO.setId(null);
-        return save(clientBuild(clientDTO, user));
+        return save(clientBuilder(clientDTO, user));
     }
 
     @Transactional
     public ClientProjection update(ClientDTO clientDTO, User user) {
-        return save(clientBuild(clientDTO, user));
+        return save(clientBuilder(clientDTO, user));
     }
 
     @Transactional
@@ -69,7 +67,7 @@ public class ClientService {
         return pf.createProjection(ClientProjection.class, client);
     }
 
-    private Client clientBuild(ClientDTO clientDTO, User user) {
+    private Client clientBuilder(ClientDTO clientDTO, User user) {
         return Client.builder()
                 .id(clientDTO.getId())
                 .name(clientDTO.getName())

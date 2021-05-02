@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,12 +27,14 @@ public class ServiceOrder {
 
     @NotNull
     private StatusEnum status;
+    private String statusInfo;
 
     @NotNull
     private BigDecimal value;
 
     @NotNull
     private Timestamp startDate;
+    private Timestamp stoppedDate;
     private Timestamp finishDate;
 
     private String description;

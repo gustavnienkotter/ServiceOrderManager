@@ -7,12 +7,14 @@ import java.util.List;
 public interface ServiceOrderProjection {
 
     Long getId();
+    String getStatus();
+    String getStatusInfo();
     BigDecimal getValue();
     Timestamp getStartDate();
+    Timestamp getStoppedDate();
     Timestamp getFinishDate();
     Timestamp getRegisterDate();
     String getDescription();
-    String getStatus();
     List<EquipmentProjection> getEquipment();
     ClientProjection getResponsibleCustomer();
 }

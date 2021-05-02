@@ -1,4 +1,4 @@
-package com.gustavnienkotter.ServiceOrderManager.dto.serviceOrderDto;
+package com.gustavnienkotter.ServiceOrderManager.dto.serviceOrder;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.gustavnienkotter.ServiceOrderManager.dto.equipmentDto;
+package com.gustavnienkotter.ServiceOrderManager.dto.user;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class EquipmentDTO {
+public class UserDTO {
 
     private Long id;
 
@@ -16,12 +16,11 @@ public class EquipmentDTO {
 
     @NotEmpty
     @NotNull
-    private String type;
+    private String username;
 
     @NotEmpty
     @NotNull
-    private String brand;
-
-    private String description;
+    private String password;
+    private String authorities;
 
 }
