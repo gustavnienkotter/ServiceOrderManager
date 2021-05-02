@@ -11,10 +11,10 @@
   - In each method in the controllers has notes for Swagger quickly explaining what each method does, waits for and returns. I wanna use Enums to better the code visualization and avoid future bugs/errors on this Swagger annotations (I tried but I had some problems to change, so I left the texts hardcoded). 
  
  /dto:
-  I separeted then in subfolder because Service Order will use more than one DTO, I used more than one to facilitate validations.
+  - I separeted then in subfolder because Service Order will use more than one DTO, I used more than one to facilitate validations.
  
  /enums:
-  I put some unused Enums (Ex.: SwaggerTagsEnum) to future implementations, Explained on Controller
+  - I put some unused Enums (Ex.: SwaggerTagsEnum) to future implementations, Explained on Controller
  
  /exception:
   - Classes to handle the messages of expected exceptions;
