@@ -1,0 +1,23 @@
+server:
+  error:
+    include-stacktrace: never
+
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.0.23:5432/serviceordermanager
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs
+    path: /swagger-ui
