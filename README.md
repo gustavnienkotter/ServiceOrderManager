@@ -1,7 +1,17 @@
 # ServiceOrderManager
- Just a pessoal project
+ Just a personal project
  
-#Project structure:
+# How to configure API:
+Its simple, just set the database connection in resources/application.yml, the Spring will boot and create the admin user if then not exists (I will made something better to create the admin in the future).
+If API successful up, you can access the Swagger by https://server:port/context-path/swagger-ui and login with the admin (credentials are below), now you can use all of the API
+
+# Important:
+Default Admin credentials:
+ username: admin
+ password: admin
+Only the admin can create new Users.
+
+# Project structure:
  
  /Config:
   - Has all Spring security configurations, line 28 was commented for tests, but this is a important line to protect for cross site requests.
@@ -39,3 +49,13 @@
  
  /util
   - Has all util methods, in the moment I use just DateUtil
+
+# Used libs:
+Spring:
+ - Security
+ - DevTools
+ - Web
+ - JPA
+Lombok
+SpringDoc (Contains Swagger and others stuffs to future implements)
+ - Swagger
