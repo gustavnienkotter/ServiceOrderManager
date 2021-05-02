@@ -51,6 +51,8 @@ Default Admin credentials:
   - Has all util methods, in the moment I use just DateUtil
 
 # Used libs:
+Java 11
+
 Spring:
  - Security
  - DevTools
