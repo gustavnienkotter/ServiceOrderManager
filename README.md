@@ -6,10 +6,10 @@ Its simple, just set the database connection in resources/application.yml, the S
 If API successful up, you can access the Swagger by https://server:port/context-path/swagger-ui and login with the admin (credentials are below), now you can use all of the API
 
 # Important:
+Only the admin can create new Users!
 Default Admin credentials:
 - username: admin
 - password: admin
-<br>Only the admin can create new Users.
 
 # Project structure:
  
