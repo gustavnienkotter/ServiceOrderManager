@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
-    User findFirstById(Long id);
     boolean existsByUsername(String username);
 
     @Query(value = "select count(id) from m_user where authorities_roles LIKE '%ROLE_ADMIN%'", nativeQuery = true)

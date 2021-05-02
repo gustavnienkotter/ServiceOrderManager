@@ -13,7 +13,6 @@ import com.gustavnienkotter.ServiceOrderManager.model.ServiceOrder;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ServiceOrderProjection;
 import com.gustavnienkotter.ServiceOrderManager.repository.ServiceOrderRepository;
-import com.gustavnienkotter.ServiceOrderManager.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
