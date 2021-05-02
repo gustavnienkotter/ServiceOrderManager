@@ -56,6 +56,8 @@ Spring:
  - DevTools
  - Web
  - JPA
+
 Lombok
+
 SpringDoc (Contains Swagger and others stuffs to future implements)
  - Swagger
