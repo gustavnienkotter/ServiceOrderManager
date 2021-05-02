@@ -7,8 +7,8 @@ If API successful up, you can access the Swagger by https://server:port/context-
 
 # Important:
 Default Admin credentials:
- username: admin
- password: admin
+<br> username: admin
+<br> password: admin
 Only the admin can create new Users.
 
 # Project structure:
