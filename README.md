@@ -6,8 +6,10 @@ Its simple, just set the database connection in resources/application.yml, the S
 If API successful up, you can access the Swagger by https://server:port/context-path/swagger-ui and login with the admin (credentials are below), now you can use all of the API
 
 # Important:
-Only the admin can create new Users!
-Default Admin credentials:
+Access Swagger to tests the endpoints (use https://server:port/context-path/swagger-ui, eg https://localhost:8080/swagger-ui);
+<br>You must be logged to use the endpoints;
+<br>Only the admin can create new Users;
+<br>Default Admin credentials:
 - username: admin
 - password: admin
 
@@ -50,10 +52,14 @@ Default Admin credentials:
  /util
   - Has all util methods, in the moment I use just DateUtil
 
+# Request flow
+
+Send the Json to API > Spring converts Json to DTO and send the DTO to Controller > Controller send to Service > Service convert DTO to Entity with the builder > Service handles the Entity according to the business rule > Service send the Entity to Repository to save > repository returns to Controller a Projection.
+
 # Used libs:
 Java 11
 
-Spring:
+Spring (version: 2.4.5):
  - Security
  - DevTools
  - Web
@@ -61,5 +67,5 @@ Spring:
 
 Lombok
 
-SpringDoc (Contains Swagger and others stuffs to future implements)
+SpringDoc(version: 1.5.8) (Contains Swagger and others stuffs to future implements)
  - Swagger
