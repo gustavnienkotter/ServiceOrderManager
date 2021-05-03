@@ -38,4 +38,7 @@ public class ServiceOrderDTO {
     private Timestamp startDate;
     private Timestamp finishDate;
 
+    @JsonIgnore
+    private Timestamp registerDate;
+
 }

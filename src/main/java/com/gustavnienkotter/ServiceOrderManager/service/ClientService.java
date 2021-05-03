@@ -7,6 +7,7 @@ import com.gustavnienkotter.ServiceOrderManager.model.Client;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.ClientProjection;
 import com.gustavnienkotter.ServiceOrderManager.repository.ClientRepository;
+import com.gustavnienkotter.ServiceOrderManager.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import javax.transaction.Transactional;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final DateUtil dateUtil;
 
     public Page<ClientProjection> listAll(Pageable pageable, User user) {
         return clientRepository.findAllByRegistrationUser(pageable, user);
@@ -33,11 +35,14 @@ public class ClientService {
     @Transactional
     public ClientProjection create(ClientDTO clientDTO, User user) {
         clientDTO.setId(null);
+        clientDTO.setRegisterDate(dateUtil.timestampNow());
         return save(clientBuilder(clientDTO, user));
     }
 
     @Transactional
     public ClientProjection update(ClientDTO clientDTO, User user) {
+        Client clientInDatabase = findByidOrThrowBadRequest(clientDTO.getId(), user);
+        clientDTO.setRegisterDate(clientInDatabase.getRegisterDate());
         return save(clientBuilder(clientDTO, user));
     }
 
@@ -75,6 +80,7 @@ public class ClientService {
                 .email(clientDTO.getEmail())
                 .phone(clientDTO.getPhone())
                 .registrationUser(user)
+                .registerDate(clientDTO.getRegisterDate())
                 .build();
     }
 }

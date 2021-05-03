@@ -47,6 +47,7 @@ public class UserService implements UserDetailsService  {
             throw new BadRequestException(ErrorResponseEnum.USERNAME_UNAVAILABLE.getValue());
         }
         userDTO.setId(null);
+        userDTO.setRegisterDate(dateUtil.timestampNow());
         userDTO.setAuthorities(AuthoritieRoleEnum.ROLE_USER.name());
         return save(userDTO);
     }
@@ -71,6 +72,7 @@ public class UserService implements UserDetailsService  {
     public User update(UserDTO userDTO) {
         User userInDatabase = findByIdOrThrowBadRequest(userDTO.getId());
         userDTO.setAuthorities(userInDatabase.getAuthoritiesRoles());
+        userDTO.setRegisterDate(userInDatabase.getRegisterDate());
         return save(userDTO);
     }
 
@@ -101,6 +103,7 @@ public class UserService implements UserDetailsService  {
                 .username(userDTO.getUsername())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .authoritiesRoles(userDTO.getAuthorities())
+                .registerDate(userDTO.getRegisterDate())
                 .build();
     }
 }
