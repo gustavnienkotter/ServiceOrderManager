@@ -19,6 +19,6 @@ public enum ErrorResponseEnum {
     }
 
     public String getValue() {
-        return value + ", please check documentation at: somelink";
+        return value + ", please check documentation at: https://github.com/gustavnienkotter/ServiceOrderManager";
     }
 }

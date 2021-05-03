@@ -1,9 +1,11 @@
 package com.gustavnienkotter.ServiceOrderManager.dto.equipment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 public class EquipmentDTO {
@@ -23,5 +25,8 @@ public class EquipmentDTO {
     private String brand;
 
     private String description;
+
+    @JsonIgnore
+    private Timestamp registerDate;
 
 }

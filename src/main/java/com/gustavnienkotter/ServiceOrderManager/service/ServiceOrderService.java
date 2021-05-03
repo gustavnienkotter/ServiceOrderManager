@@ -29,6 +29,7 @@ public class ServiceOrderService {
     private final ServiceOrderRepository serviceOrderRepository;
     private final EquipmentService equipmentService;
     private final ClientService clientService;
+    private final DateUtil dateUtil;
 
     public Page<ServiceOrderProjection> listAll(Pageable pageable, User user) {
         return serviceOrderRepository.findAllByRegistrationUser(pageable, user);
@@ -94,6 +95,7 @@ public class ServiceOrderService {
     public ServiceOrderProjection create(ServiceOrderDTO serviceOrderDTO, User user) {
         serviceOrderDTO.setId(null);
         serviceOrderDTO.setStatusInfo("Service Order created");
+        serviceOrderDTO.setRegisterDate(dateUtil.timestampNow());
         return save(serviceOrderBuilder(serviceOrderDTO, user));
     }
 
@@ -104,6 +106,7 @@ public class ServiceOrderService {
         serviceOrderToSave.setStartDate(serviceOrderInDatabase.getStartDate());
         serviceOrderToSave.setResponsibleCustomer(serviceOrderInDatabase.getResponsibleCustomer());
         serviceOrderToSave.setEquipment(serviceOrderInDatabase.getEquipment());
+        serviceOrderToSave.setRegisterDate(serviceOrderInDatabase.getRegisterDate());
         return save(serviceOrderToSave);
     }
 
@@ -144,6 +147,7 @@ public class ServiceOrderService {
                 .status(processStatus(serviceOrderDTO))
                 .statusInfo(serviceOrderDTO.getStatusInfo())
                 .responsibleCustomer(serviceOrderDTO.getResponsibleCustomer())
+                .registerDate(serviceOrderDTO.getRegisterDate())
                 .registrationUser(user)
                 .build();
     }

@@ -7,6 +7,7 @@ import com.gustavnienkotter.ServiceOrderManager.model.Equipment;
 import com.gustavnienkotter.ServiceOrderManager.model.User;
 import com.gustavnienkotter.ServiceOrderManager.model.projectionModel.EquipmentProjection;
 import com.gustavnienkotter.ServiceOrderManager.repository.EquipmentRepository;
+import com.gustavnienkotter.ServiceOrderManager.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import javax.transaction.Transactional;
 public class EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
+    private final DateUtil dateUtil;
 
     public Page<EquipmentProjection> listAll(Pageable pageable, User user) {
         return equipmentRepository.findAllByRegistrationUser(pageable, user);
@@ -33,11 +35,14 @@ public class EquipmentService {
     @Transactional
     public EquipmentProjection create(EquipmentDTO equipmentDTO, User user) {
         equipmentDTO.setId(null);
+        equipmentDTO.setRegisterDate(dateUtil.timestampNow());
         return save(equipmentBuilder(equipmentDTO, user));
     }
 
     @Transactional
     public EquipmentProjection update(EquipmentDTO equipmentDTO, User user) {
+        Equipment equipmentInDataBase = findByIdOrThrowBadRequest(equipmentDTO.getId(), user);
+        equipmentDTO.setRegisterDate(equipmentInDataBase.getRegisterDate());
         return save(equipmentBuilder(equipmentDTO, user));
     }
 
@@ -75,6 +80,7 @@ public class EquipmentService {
                 .brand(equipmentDTO.getBrand())
                 .description(equipmentDTO.getDescription())
                 .registrationUser(user)
+                .registerDate(equipmentDTO.getRegisterDate())
                 .build();
     }
 
