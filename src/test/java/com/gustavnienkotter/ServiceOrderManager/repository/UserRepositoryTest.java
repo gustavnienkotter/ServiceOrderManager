@@ -169,7 +169,7 @@ class UserRepositoryTest {
         User userToSave = createUser();
         userRepository.save(userToSave);
 
-        Assertions.assertThat(userRepository.countAdminUsers()).isEqualTo(1L);
+        Assertions.assertThat(userRepository.countAdminUsers()).isEqualTo(0L);
 
     }
 
@@ -185,7 +185,7 @@ class UserRepositoryTest {
     private User createAdminUser(){
         return User.builder()
                 .name("Test user")
-                .username("user.test")
+                .username("admin.test")
                 .password("test")
                 .authoritiesRoles(AuthoritieRoleEnum.ROLE_ADMIN.name())
                 .build();
