@@ -1,6 +1,9 @@
 # ServiceOrderManager
  Just a personal project
  
+<br>Ps.: Unitary tests unavaible because they have not been finalized, check the pull request on the link below: 
+<br>https://github.com/gustavnienkotter/ServiceOrderManager/pull/1
+ 
 # How to configure API:
 Its simple, just set the database connection in resources/application.yml, the Spring will boot and create the admin user if then not exists (I will made something better to create the admin in the future).
 If API successful up, you can access the Swagger by https://server:port/context-path/swagger-ui and login with the admin (credentials are below), now you can use all of the API
