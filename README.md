@@ -1,6 +1,5 @@
 # ServiceOrderManager
  Just a personal project
- 
 <br>Ps.: Unitary tests unavaible because they have not been finalized, check the pull request on the link below: 
 <br>https://github.com/gustavnienkotter/ServiceOrderManager/pull/1
  
@@ -36,6 +35,7 @@ Access Swagger to tests the endpoints (use https://server:port/context-path/swag
  
  /handler:
   - Where are the ExceptionHandler;
+ 
  /model
   - Where are all the models
   
