@@ -52,10 +52,11 @@ public class UserService implements UserDetailsService  {
     }
 
     public void createAdminUser() {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User user = User.builder()
                 .name("Admin")
                 .username("admin")
-                .password("admin")
+                .password(passwordEncoder.encode("admin"))
                 .registerDate(dateUtil.timestampNow())
                 .authoritiesRoles(AuthoritieRoleEnum.ROLE_ADMIN.name())
                 .build();
