@@ -59,6 +59,7 @@ Access Swagger to tests the endpoints (use https://server:port/context-path/swag
 # Request flow
 
 Send the Json to API > Spring converts Json to DTO and send the DTO to Controller > Controller send to Service > Service convert DTO to Entity with the builder > Service handles the Entity according to the business rule > Service send the Entity to Repository to save > repository returns to Controller a Projection > Spring convert Projection to JSON and return then.
+Ps.: User classes dont use projections because admin is the only user with access to the endpoint, but is interesting to change then to use projection to put more security and avoid someone to enter in other user, but for the tests of this project I decided not to put projection on these classes
 
 # Used libs:
 Java 11
