@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -83,11 +84,8 @@ public class UserService implements UserDetailsService  {
 
     @Transactional
     public void delete(Long id) {
-        userRepository.delete(findFirstById(id));
-    }
-
-    public User findFirstById(Long id) {
-        return userRepository.findFirstById(id);
+        Optional<User> user = userRepository.findById(id);
+        user.ifPresent(userRepository::delete);
     }
 
     private User save(UserDTO userDTO) {
